@@ -8,12 +8,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.FileProvider;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +31,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,6 +93,7 @@ public class DesignMainActivity extends AppCompatActivity implements OnProgressL
     private UpdateService mUpdateService;
     private MyServiceConnected mMyServiceConnected;
     private ProgressBar mProgressBar;
+    private TextView mTv_progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -303,13 +308,18 @@ public class DesignMainActivity extends AppCompatActivity implements OnProgressL
 
     @Override
     public void onProgress(int progress, int max) {
+        if (mProgressBar == null) {
+            showUpdateDialog();
+        }
         mProgressBar.setProgress(progress * 100 / max);
+        mTv_progress.setText("下载中(" + progress * 100 / max + "%)");
     }
 
     private void showProgressDialog() {
         Dialog dialog = new Dialog(this);
-        View view = View.inflate(this, R.layout.dialog_progress, null);
+        View view = View.inflate(this, R.layout.dialog_update_progress, null);
         mProgressBar = (ProgressBar) view.findViewById(R.id.progress);
+        mTv_progress = (TextView) view.findViewById(R.id.tv_progress);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(false);
         dialog.setContentView(view);
@@ -321,6 +331,7 @@ public class DesignMainActivity extends AppCompatActivity implements OnProgressL
         public void onServiceConnected(ComponentName name, IBinder service) {
             mMyBinder = (UpdateService.MyBinder) service;
             mUpdateService = mMyBinder.getService(DesignMainActivity.this);
+            mMyBinder.startDown();
         }
 
         @Override
@@ -340,5 +351,24 @@ public class DesignMainActivity extends AppCompatActivity implements OnProgressL
         super.onDestroy();
         mBind.unbind();
         unbindService(mMyServiceConnected);
+    }
+
+    @Override
+    public void install(File file) {
+        try {
+            Intent intent = new Intent(Intent.ACTION_VIEW);
+            if (Build.VERSION.SDK_INT < 24) {
+                intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
+            } else {
+                Uri uri = FileProvider.getUriForFile(this, this.getPackageName() + ".updatefileprovider", file);
+                intent.setDataAndType(uri, "application/vnd.android.package-archive");
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            }
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.exit(0);
     }
 }

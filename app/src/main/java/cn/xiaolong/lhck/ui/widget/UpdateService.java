@@ -4,7 +4,9 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -24,6 +26,22 @@ public class UpdateService extends Service {
 
     private OnProgressListener mListener;
     private int progress;
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    mListener.showProgress(msg.arg1);
+                    break;
+                case 2:
+                    mListener.onProgress(progress, msg.arg1);
+                    break;
+                case 3:
+                    mListener.install(new File(getTempPath(UpdateService.this)));
+                    break;
+            }
+        }
+    };
 
     @Nullable
     @Override
@@ -36,61 +54,72 @@ public class UpdateService extends Service {
             mListener = listener;
             return UpdateService.this;
         }
+
+        public void startDown() {
+            Log.e("******", "onCreate");
+            new Thread() {
+                @Override
+                public void run() {
+                    FileOutputStream fos = null;
+                    try {
+                        fos = new FileOutputStream(makeFile(UpdateService.this));
+                        // 创建连接  
+                        URL url = new URL("http://apk.kosungames.com/app-c6-release.apk");
+                        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                        //处理下载读取长度为-1 问题  
+                        conn.setRequestProperty("Accept", "application/*");
+                        conn.connect();
+                        // 获取文件大小  
+                        int length = conn.getContentLength();
+                        Message msg = new Message();
+                        msg.what = 1;
+                        msg.arg1 = length;
+                        handler.sendMessage(msg);
+                        InputStream is = conn.getInputStream();
+                        int len = 0;
+                        byte[] b = new byte[1024];
+                        while ((len = is.read(b)) != -1) {
+                            fos.write(b, 0, len);
+                            progress += len;
+                            Message msg2 = new Message();
+                            msg2.what = 2;
+                            msg2.arg1 = length;
+                            handler.sendMessage(msg2);
+                        }
+                        fos.flush();
+                        handler.sendEmptyMessage(3);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                        if (fos != null) try {
+                            fos.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }.start();
+        }
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Log.e("******","onCreate");new Thread() {
-            @Override
-            public void run() {
-                FileOutputStream fos = null;
-                try {
-                    fos = new FileOutputStream(makeFile(UpdateService.this));
-                    // 创建连接  
-                    URL url = new URL("https://apk.kosungames.com/app-c6-release.apk");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    //处理下载读取长度为-1 问题  
-                    conn.setRequestProperty("Accept", "application/*");
-                    conn.connect();
-                    // 获取文件大小  
-                    int length = conn.getContentLength();
-                    mListener.showProgress(length);
-                    InputStream is = conn.getInputStream();
-                    int len = 0;
-                    byte[] b = new byte[1024];
-                    while ((len = is.read(b)) != -1) {
-                        fos.write(b, 0, len);
-                        progress += len;
-                        mListener.onProgress(progress,length);
-                    }
-
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (fos != null) try {
-                        fos.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }.start();
     }
 
-    public static File makeFile(Context context) {
-        File file = new File(context.getExternalCacheDir(), File.separator + "flashloan");
+    public File makeFile(Context context) {
+        File file = new File(context.getExternalCacheDir(), File.separator + "flashloan11");
         if (!file.exists()) {
             file.mkdirs();
         }
 
-        File newFile = new File(file, "xiaoniu");
+        File newFile = new File(file, "xiaoniu22");
         if (newFile.exists()) {
             newFile.delete();
         }
-        return new File(file, "xiaoniu" + ".apk");
+        return new File(file, "xiaoniu22" + ".apk");
     }
 
     /**
@@ -99,8 +128,8 @@ public class UpdateService extends Service {
      * @param context
      * @return
      */
-    public static String getTempPath(Context context) {
-        File apk = new File(context.getExternalCacheDir(), File.separator + "flashloan" + File.separator + "xiaoniu");
+    public String getTempPath(Context context) {
+        File apk = new File(context.getExternalCacheDir(), File.separator + "flashloan11" + File.separator + "xiaoniu22");
         return apk.getAbsolutePath();
     }
 }

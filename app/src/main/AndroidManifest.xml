@@ -250,6 +250,15 @@
         <activity android:name="cn.xiaolong.lhck.ui.DesignMainActivity">
         </activity>
         <service android:name=".ui.widget.UpdateService"/>
+        <provider
+            android:name=".ui.widget.UpdateFileProvider"
+            android:authorities="${applicationId}.updatefileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/update_cache_path"/>
+        </provider>
     </application>
 
 </manifest>
