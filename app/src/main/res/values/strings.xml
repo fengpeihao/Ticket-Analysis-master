@@ -1,0 +1,49 @@
+<resources>
+    <string name="app_name">六合彩库</string>
+
+    <!-- 请求状态-->
+    <string name="load_system_busy">一不留神，页面走丢啦~</string>
+    <string name="load_loading_dialog_text">加载中</string>
+    <string name="load_empty">暂无数据</string>
+    <string name="load_no_network">好像断网啦~</string>
+    <string name="load_try_again">点击重试</string>
+    <string name="load_net_ungeliable">网络不给力，请稍后再试</string>
+    <string name="load_empty_search">抱歉未找到相关结果</string>
+    <string name="load_loading">正在加载中...</string>
+    <string name="load_time_out">连接超时...</string>
+    <string name="load_user_invalid">当前用户已过期</string>
+    <string name="service_conn_fail">无法连接服务器</string>
+
+    <!--登录-->
+    <string name="account_login_title">登录</string>
+    <string name="account_login_title_right">注册</string>
+    <string name="account_login_btn">确定登录</string>
+    <string name="account_login_forget">忘记密码？</string>
+    <string name="account_login_account_hint">请输入手机号</string>
+    <string name="account_login_verify_hint">请输入查询验证码</string>
+
+    <string name="lottery_history">开奖历史</string>
+    <string name="news_bottom">新闻</string>
+    <string name="lottery_bottom">开奖</string>
+    <string name="history_bottom">历史</string>
+    <string name="me_bottom">设置</string>
+    <string name="about_titile">关于</string>
+    <string name="lottery_detail_title">开奖详情</string>
+    <string name="news_title">资讯详情</string>
+
+    <string name="setting">系统设置</string>
+    <string name="rule">开奖规则</string>
+    <string name="history">历史开奖</string>
+    <string name="s14sf">中国足球彩票胜负游戏规则</string>
+    <string name="s1x5"> 11选5玩法规则</string>
+    <string name="df61">东方6+1玩法规则</string>
+    <string name="dlt">大乐透玩法规则</string>
+    <string name="fc3d"> 福彩3D玩法规则</string>
+    <string name="k3">快3玩法规则</string>
+    <string name="pl3">排三玩法规则</string>
+    <string name="pl5"> 排列五玩法规则</string>
+    <string name="qlc">七乐彩玩法规则</string>
+    <string name="qyh">山东群英会官方玩法规则</string>
+    <string name="ssc">时时彩玩法规则</string>
+    <string name="ssq">双色球玩法规则</string>
+</resources>

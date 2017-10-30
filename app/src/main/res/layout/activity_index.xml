@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/white"
+    android:fillViewport="true"
+    android:padding="2.0dip"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:id="@+id/wrapper"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/announceLayout"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/announce_bg"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/announceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="#ffffffff"
+                android:textSize="20.0sp" />
+
+            <ImageView
+                android:id="@+id/announceImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:layout_marginRight="10.0dip"
+                android:src="@drawable/no" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/linemm"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:minHeight="480.0dip"
+            android:orientation="horizontal">
+
+            <LinearLayout
+
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/kaijiang"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="2.0dip"
+                    android:layout_weight="1.0"
+                    android:background="#ffe64663">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15.0dip"
+                        android:paddingTop="30.0dip"
+                        android:text="开奖公告"
+                        android:textColor="#fffcfaff"
+                        android:textSize="18.0sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/one" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/ssq"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="2.0dip"
+                    android:layout_weight="1.0"
+                    android:background="#ff21adc0">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15.0dip"
+                        android:paddingTop="10.0dip"
+                        android:text="时时彩高频"
+                        android:textColor="#fffcfaff"
+                        android:textSize="18.0sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/two" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/user"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="2.0dip"
+                    android:layout_weight="1.3"
+                    android:background="#ff1bc366">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10.0dip"
+                        android:paddingTop="5.0dip"
+                        android:text="我的关注"
+                        android:textColor="#fffcfaff"
+                        android:textSize="18.0sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/three" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/yuce"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="2.0dip"
+                    android:layout_weight="1.3"
+                    android:background="#ff88cb29">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10.0dip"
+                        android:paddingTop="30.0dip"
+                        android:text="全国彩讯"
+                        android:textColor="#fffcfaff"
+                        android:textSize="18.0sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dimen_15dp"
+                        android:src="@drawable/four" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/buy"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="2.0dip"
+                    android:layout_weight="1.0"
+                    android:background="#ffedb122">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15.0dip"
+                        android:paddingTop="10.0dip"
+                        android:text="境外彩讯"
+                        android:textColor="#fffcfaff"
+                        android:textSize="18.0sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/five" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/trend"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="2.0dip"
+                    android:layout_weight="1.3"
+                    android:background="#ff4c94ea">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10.0dip"
+                        android:paddingTop="5.0dip"
+                        android:text="彩票规则"
+                        android:textColor="#fffcfaff"
+                        android:textSize="18.0sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/six" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/more"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_margin="2.0dip"
+                    android:layout_weight="1.3"
+                    android:background="#ff9960e5">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="15.0dip"
+                        android:paddingTop="10.0dip"
+                        android:text="更多"
+                        android:textColor="#fffcfaff"
+                        android:textSize="18.0sp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/seven" />
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
