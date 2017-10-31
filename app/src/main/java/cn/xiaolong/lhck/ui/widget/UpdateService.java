@@ -64,7 +64,7 @@ public class UpdateService extends Service {
                     try {
                         fos = new FileOutputStream(makeFile(UpdateService.this));
                         // 创建连接  
-                        URL url = new URL("http://apk.kosungames.com/app-c6-release.apk");
+                        URL url = new URL("http://bmob-cdn-13110.b0.upaiyun.com/2017/09/21/42c84147401a93fe80ffedff581bab06.apk");
                         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                         //处理下载读取长度为-1 问题  
                         conn.setRequestProperty("Accept", "application/*");
@@ -129,7 +129,7 @@ public class UpdateService extends Service {
      * @return
      */
     public String getTempPath(Context context) {
-        File apk = new File(context.getExternalCacheDir(), File.separator + "flashloan11" + File.separator + "xiaoniu22");
+        File apk = new File(context.getExternalCacheDir(), File.separator + "flashloan11" + File.separator + "xiaoniu22"+".apk");
         return apk.getAbsolutePath();
     }
 }
